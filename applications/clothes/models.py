@@ -1,11 +1,12 @@
 from django.db import models
 
 from applications.brand.models import Brand
+from applications.account.models import User
 
 
 class Clothes(models.Model):
     type_of_clothes = models.CharField(max_length=255)
-    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, related_name='clothes')
+    brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, related_name='clothes_brand')
     description = models.TextField()
     price = models.DecimalField(max_digits=11, decimal_places=2)
     in_stock = models.BooleanField(default=True)
@@ -16,10 +17,9 @@ class Clothes(models.Model):
 
 
 class ClothesImage(models.Model):
-    clothes = models.ForeignKey(Clothes, on_delete=models.CASCADE, related_name='image')
+    clothes = models.ForeignKey(Clothes, on_delete=models.CASCADE, related_name='clothes_image')
     image = models.ImageField(upload_to='')
 
     def __str__(self):
         return self.clothes.type_of_clothes
-
 

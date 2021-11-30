@@ -1,5 +1,4 @@
 from django.urls import path
-
 from applications.clothes.views import ClothesListView, ClothesDetailView
 
 urlpatterns = [
